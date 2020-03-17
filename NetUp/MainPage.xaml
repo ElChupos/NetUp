@@ -29,5 +29,6 @@
             </StackPanel>
             <Button Content="Save" HorizontalAlignment="Center" FontSize="20" Width="100" Height="50" Click="Button_Click"/>
         </StackPanel>
+        <TextBlock HorizontalAlignment="Left" Margin="31,20,0,0" Text="NetUp" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="20"/>
     </Grid>
 </Page>
