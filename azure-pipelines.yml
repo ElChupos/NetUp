@@ -31,5 +31,5 @@ steps:
 - task: DownloadPipelineArtifact@2
   inputs:
     buildType: 'current'
-    artifactName: 'bin/Release/NetUp.exe'
+    artifactName: 'NetUp.exe'
     targetPath: '$(Pipeline.Workspace)'
