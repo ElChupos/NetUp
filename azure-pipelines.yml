@@ -10,7 +10,7 @@ pool:
   vmImage: 'windows-latest'
 
 variables:
-  solution: 'NutUptimeMonitor/NetUp.sln'
+  solution: 'NetUptimeMonitor/NetUp.sln'
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
 
