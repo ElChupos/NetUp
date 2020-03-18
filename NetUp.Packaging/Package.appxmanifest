@@ -8,8 +8,8 @@
 
   <Identity
     Name="a759749d-bd41-4be6-bde6-7c3e19e4ed79"
-    Publisher="CN=Jarryd Campi"
-    Version="1.0.2.0" />
+    Publisher="CN=jarry"
+    Version="1.0.0.0" />
 
   <Properties>
     <DisplayName>NetUp.Packaging</DisplayName>
