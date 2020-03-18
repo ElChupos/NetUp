@@ -34,15 +34,23 @@
             this.label3 = new System.Windows.Forms.Label();
             this.SucceedLabel = new System.Windows.Forms.Label();
             this.FailedLabel = new System.Windows.Forms.Label();
-            this.form1BindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.SaveButton = new System.Windows.Forms.Button();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
             this.flowLayoutPanel3 = new System.Windows.Forms.FlowLayoutPanel();
-            ((System.ComponentModel.ISupportInitialize)(this.form1BindingSource)).BeginInit();
+            this.FailRoot = new System.Windows.Forms.FlowLayoutPanel();
+            this.label1 = new System.Windows.Forms.Label();
+            this.LastFailLabel = new System.Windows.Forms.Label();
+            this.SuccessRoot = new System.Windows.Forms.FlowLayoutPanel();
+            this.label4 = new System.Windows.Forms.Label();
+            this.LastSuccessLabel = new System.Windows.Forms.Label();
+            this.form1BindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.flowLayoutPanel1.SuspendLayout();
             this.flowLayoutPanel2.SuspendLayout();
             this.flowLayoutPanel3.SuspendLayout();
+            this.FailRoot.SuspendLayout();
+            this.SuccessRoot.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.form1BindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // button1
@@ -91,13 +99,9 @@
             this.FailedLabel.TabIndex = 5;
             this.FailedLabel.Text = "0";
             // 
-            // form1BindingSource
-            // 
-            this.form1BindingSource.DataSource = typeof(NetUptimeMonitor.Form1);
-            // 
             // SaveButton
             // 
-            this.SaveButton.Location = new System.Drawing.Point(3, 96);
+            this.SaveButton.Location = new System.Drawing.Point(3, 134);
             this.SaveButton.Name = "SaveButton";
             this.SaveButton.Size = new System.Drawing.Size(75, 23);
             this.SaveButton.TabIndex = 6;
@@ -107,13 +111,14 @@
             // 
             // flowLayoutPanel1
             // 
-            this.flowLayoutPanel1.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.flowLayoutPanel1.Controls.Add(this.button1);
             this.flowLayoutPanel1.Controls.Add(this.flowLayoutPanel2);
             this.flowLayoutPanel1.Controls.Add(this.flowLayoutPanel3);
+            this.flowLayoutPanel1.Controls.Add(this.SuccessRoot);
+            this.flowLayoutPanel1.Controls.Add(this.FailRoot);
             this.flowLayoutPanel1.Controls.Add(this.SaveButton);
             this.flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(306, 96);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(12, 12);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
             this.flowLayoutPanel1.Size = new System.Drawing.Size(271, 254);
             this.flowLayoutPanel1.TabIndex = 7;
@@ -140,22 +145,90 @@
             this.flowLayoutPanel3.Size = new System.Drawing.Size(63, 13);
             this.flowLayoutPanel3.TabIndex = 8;
             // 
+            // FailRoot
+            // 
+            this.FailRoot.AutoSize = true;
+            this.FailRoot.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.FailRoot.Controls.Add(this.label1);
+            this.FailRoot.Controls.Add(this.LastFailLabel);
+            this.FailRoot.Location = new System.Drawing.Point(3, 115);
+            this.FailRoot.Name = "FailRoot";
+            this.FailRoot.Size = new System.Drawing.Size(74, 13);
+            this.FailRoot.TabIndex = 9;
+            this.FailRoot.Visible = false;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(3, 0);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(49, 13);
+            this.label1.TabIndex = 3;
+            this.label1.Text = "Last Fail:";
+            // 
+            // LastFailLabel
+            // 
+            this.LastFailLabel.AutoSize = true;
+            this.LastFailLabel.Location = new System.Drawing.Point(58, 0);
+            this.LastFailLabel.Name = "LastFailLabel";
+            this.LastFailLabel.Size = new System.Drawing.Size(13, 13);
+            this.LastFailLabel.TabIndex = 5;
+            this.LastFailLabel.Text = "0";
+            // 
+            // SuccessRoot
+            // 
+            this.SuccessRoot.AutoSize = true;
+            this.SuccessRoot.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.SuccessRoot.Controls.Add(this.label4);
+            this.SuccessRoot.Controls.Add(this.LastSuccessLabel);
+            this.SuccessRoot.Location = new System.Drawing.Point(3, 96);
+            this.SuccessRoot.Name = "SuccessRoot";
+            this.SuccessRoot.Size = new System.Drawing.Size(99, 13);
+            this.SuccessRoot.TabIndex = 10;
+            this.SuccessRoot.Visible = false;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(3, 0);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(74, 13);
+            this.label4.TabIndex = 3;
+            this.label4.Text = "Last Success:";
+            // 
+            // LastSuccessLabel
+            // 
+            this.LastSuccessLabel.AutoSize = true;
+            this.LastSuccessLabel.Location = new System.Drawing.Point(83, 0);
+            this.LastSuccessLabel.Name = "LastSuccessLabel";
+            this.LastSuccessLabel.Size = new System.Drawing.Size(13, 13);
+            this.LastSuccessLabel.TabIndex = 5;
+            this.LastSuccessLabel.Text = "0";
+            // 
+            // form1BindingSource
+            // 
+            this.form1BindingSource.DataSource = typeof(NetUptimeMonitor.Form1);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(301, 347);
             this.Controls.Add(this.flowLayoutPanel1);
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.Text = "NetUp";
             this.Load += new System.EventHandler(this.Form1_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.form1BindingSource)).EndInit();
             this.flowLayoutPanel1.ResumeLayout(false);
             this.flowLayoutPanel1.PerformLayout();
             this.flowLayoutPanel2.ResumeLayout(false);
             this.flowLayoutPanel2.PerformLayout();
             this.flowLayoutPanel3.ResumeLayout(false);
             this.flowLayoutPanel3.PerformLayout();
+            this.FailRoot.ResumeLayout(false);
+            this.FailRoot.PerformLayout();
+            this.SuccessRoot.ResumeLayout(false);
+            this.SuccessRoot.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.form1BindingSource)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -172,6 +245,12 @@
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel2;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel3;
+        private System.Windows.Forms.FlowLayoutPanel SuccessRoot;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label LastSuccessLabel;
+        private System.Windows.Forms.FlowLayoutPanel FailRoot;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label LastFailLabel;
     }
 }
 

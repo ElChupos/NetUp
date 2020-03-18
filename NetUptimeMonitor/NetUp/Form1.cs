@@ -75,14 +75,16 @@ namespace NetUptimeMonitor
             SucceedLabel.Text = SucceedCount.ToString();
             FailedLabel.Text = FailedCount.ToString();
 
+            SuccessRoot.Visible = HasSucceeded;
+            FailRoot.Visible = HasFailed;
             if( HasFailed)
             {
-
+                LastFailLabel.Text = LastFail.ToShortTimeString();
             }
 
             if( HasSucceeded)
             {
-
+                LastSuccessLabel.Text = LastSuccess.ToShortTimeString();
             }
         }
 
@@ -141,6 +143,35 @@ namespace NetUptimeMonitor
                 return false;
             }
         }
+
+        private DateTime LastFail
+        {
+            get
+            {
+                foreach (var p in pings)
+                {
+                    if (p.PingStatus != IPStatus.Success)
+                        return p.PingTime;
+                }
+
+                return DateTime.MinValue;
+            }
+        }
+
+        private DateTime LastSuccess
+        {
+            get
+            {
+                foreach (var p in pings)
+                {
+                    if (p.PingStatus == IPStatus.Success)
+                        return p.PingTime;
+                }
+
+                return DateTime.MinValue;
+            }
+        }
+
 
         private bool HasSucceeded
         {
