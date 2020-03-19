@@ -31,5 +31,5 @@ steps:
 
 - task: PublishBuildArtifacts@1
   inputs:
-    pathtoPublish: 'bin/Release'
+    pathtoPublish: 'NetUptimeMonitor/NetUp/bin/Release'
     artifactName: NetUp
