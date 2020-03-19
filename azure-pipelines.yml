@@ -14,7 +14,6 @@ variables:
   solution: 'NetUptimeMonitor/NetUp.sln'
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
-  Build.ArtifactStagingDirectory: 'bin/Release'
 
 
 steps:
@@ -32,5 +31,5 @@ steps:
 
 - task: PublishBuildArtifacts@1
   inputs:
-    pathtoPublish: '$(Build.ArtifactStagingDirectory)'
+    pathtoPublish: 'bin/Release'
     artifactName: NetUp
