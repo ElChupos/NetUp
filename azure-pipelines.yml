@@ -14,6 +14,8 @@ variables:
   solution: 'NetUptimeMonitor/NetUp.sln'
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
+  Build.ArtifactStagingDirectory: 'bin/Release'
+
 
 steps:
 - task: NuGetToolInstaller@1
@@ -33,3 +35,8 @@ steps:
     buildType: 'current'
     artifactName: 'NetUp.exe'
     targetPath: '$(Pipeline.Workspace)/bin/Release'
+
+- task: PublishBuildArtifacts@1
+  inputs:
+    pathtoPublish: '$(Build.ArtifactStagingDirectory)'
+    artifactName: NetUp
