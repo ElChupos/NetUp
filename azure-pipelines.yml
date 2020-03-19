@@ -11,7 +11,7 @@ pool:
   vmImage: 'windows-latest'
 
 variables:
-  solution: 'NetUptimeMonitor/NetUp.sln'
+  solution: 'NetUp.sln'
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
 
@@ -31,5 +31,5 @@ steps:
 
 - task: PublishBuildArtifacts@1
   inputs:
-    pathtoPublish: 'NetUptimeMonitor/NetUp/bin/Release'
+    pathtoPublish: 'NetUp/bin/Release'
     artifactName: NetUp
