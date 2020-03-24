@@ -29,7 +29,7 @@ namespace NetUptimeMonitor
         public Form1()
         {
             InitializeComponent();
-            
+            this.Icon = new Icon("wifi_router_I33_icon.ico");
         }
         
         private void CheckTimer_Tick(object sender, EventArgs e)
@@ -148,10 +148,13 @@ namespace NetUptimeMonitor
         {
             get
             {
-                foreach (var p in pings)
+                if (pings.Count > 0)
                 {
-                    if (p.PingStatus != IPStatus.Success)
-                        return p.PingTime;
+                    for( int i = pings.Count - 1; i >= 0; i--)
+                    {
+                        if (pings[i].PingStatus != IPStatus.Success)
+                            return pings[i].PingTime;
+                    }
                 }
 
                 return DateTime.MinValue;
@@ -162,10 +165,10 @@ namespace NetUptimeMonitor
         {
             get
             {
-                foreach (var p in pings)
+                for (int i = pings.Count - 1; i >= 0; i--)
                 {
-                    if (p.PingStatus == IPStatus.Success)
-                        return p.PingTime;
+                    if (pings[i].PingStatus == IPStatus.Success)
+                        return pings[i].PingTime;
                 }
 
                 return DateTime.MinValue;
