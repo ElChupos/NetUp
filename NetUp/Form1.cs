@@ -29,7 +29,7 @@ namespace NetUptimeMonitor
         public Form1()
         {
             InitializeComponent();
-            this.Icon = new Icon("wifi_router_I33_icon.ico");
+            this.Icon = NetUp.Properties.Resources.wifi_router_I33_icon;
         }
         
         private void CheckTimer_Tick(object sender, EventArgs e)
