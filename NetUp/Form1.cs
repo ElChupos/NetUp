@@ -15,16 +15,19 @@ namespace NetUptimeMonitor
     {
         public bool TestingInProcess = false;
         private Timer checkTimer;
+        private DateTime testStartTime;
 
         public int TimeDuration = 1000 * 10;
 
-        public struct ConnectionPing
+        public struct ConnectionBlock
         {
-            public DateTime PingTime;
-            public IPStatus PingStatus;
+            public DateTime StartTime;
+            public DateTime EndTime;
+            public IPStatus Status;
+            public int Pings;
         }
 
-        public List<ConnectionPing> pings = new List<ConnectionPing>();
+        public List<ConnectionBlock> connections = new List<ConnectionBlock>();
 
         public Form1()
         {
@@ -56,14 +59,26 @@ namespace NetUptimeMonitor
                 result = IPStatus.DestinationHostUnreachable;
             }
 
-            //tick! check the net!
-            var cp = new ConnectionPing()
-            {
-                PingTime = System.DateTime.Now,
-                PingStatus = result
-            };
 
-            pings.Add(cp);
+            var makeNew = connections.Count == 0 || connections[connections.Count - 1].Status != result;
+            if(makeNew)
+            {
+                var newConnection = new ConnectionBlock()
+                {
+                    StartTime = DateTime.Now,
+                    EndTime = DateTime.Now,
+                    Status = result,
+                    Pings = 1
+                };
+                connections.Add(newConnection);
+            }
+            else
+            {
+                var oldConnection = connections[connections.Count - 1];
+                oldConnection.EndTime = DateTime.Now;
+                oldConnection.Pings++;
+                connections[connections.Count - 1] = oldConnection;
+            }
 
             UpdateLabels();
 
@@ -77,14 +92,14 @@ namespace NetUptimeMonitor
 
             SuccessRoot.Visible = HasSucceeded;
             FailRoot.Visible = HasFailed;
-            if( HasFailed)
+            if(GetLastBlock(out ConnectionBlock failBlock, p => p.Status != IPStatus.Success) )
             {
-                LastFailLabel.Text = LastFail.ToShortTimeString();
+                LastFailLabel.Text = failBlock.EndTime.ToShortTimeString();
             }
 
-            if( HasSucceeded)
+            if(GetLastBlock(out ConnectionBlock successBlock, p => p.Status == IPStatus.Success))
             {
-                LastSuccessLabel.Text = LastSuccess.ToShortTimeString();
+                LastSuccessLabel.Text = successBlock.EndTime.ToShortTimeString();
             }
         }
 
@@ -97,7 +112,8 @@ namespace NetUptimeMonitor
         {
             TestingInProcess = !TestingInProcess;
             button1.Text = TestingInProcess ? "Stop Testing" : "Start Testing";
-
+            testStartTime = DateTime.Now;
+            startTestingLabel.Text = $"Started testing: {testStartTime.ToString()}";
             if (TestingInProcess)
             {
                 checkTimer?.Dispose();
@@ -118,25 +134,39 @@ namespace NetUptimeMonitor
             get
             {
                 int count = 0;
-                foreach(var p in pings)
+                foreach(var p in connections)
                 {
-                    if (p.PingStatus == IPStatus.Success)
-                        count++;
+                    if (p.Status == IPStatus.Success)
+                        count += p.Pings;
                 }
 
                 return count;
             }
         }
 
-        public int FailedCount => pings.Count - SucceedCount;
+        public int TotalPings
+        {
+            get
+            {
+                int count = 0;
+                foreach (var p in connections)
+                {
+                    count += p.Pings;
+                }
+
+                return count;
+            }
+        }
+
+        public int FailedCount => TotalPings - SucceedCount;
 
         private bool HasFailed
         {
             get
             {
-                foreach( var p in pings)
+                foreach( var p in connections)
                 {
-                    if (p.PingStatus != IPStatus.Success)
+                    if (p.Status != IPStatus.Success)
                         return true;
                 }
 
@@ -144,45 +174,31 @@ namespace NetUptimeMonitor
             }
         }
 
-        private DateTime LastFail
+        private bool GetLastBlock (out ConnectionBlock block, Predicate<ConnectionBlock> predicate)
         {
-            get
+            if (connections.Count > 0)
             {
-                if (pings.Count > 0)
+                for( int i = connections.Count - 1; i >= 0; i--)
                 {
-                    for( int i = pings.Count - 1; i >= 0; i--)
+                    if( predicate.Invoke(connections[i]))
                     {
-                        if (pings[i].PingStatus != IPStatus.Success)
-                            return pings[i].PingTime;
+                        block = connections[i];
+                        return true;
                     }
                 }
-
-                return DateTime.MinValue;
             }
+
+            block = new ConnectionBlock();
+            return false;
         }
-
-        private DateTime LastSuccess
-        {
-            get
-            {
-                for (int i = pings.Count - 1; i >= 0; i--)
-                {
-                    if (pings[i].PingStatus == IPStatus.Success)
-                        return pings[i].PingTime;
-                }
-
-                return DateTime.MinValue;
-            }
-        }
-
-
+        
         private bool HasSucceeded
         {
             get
             {
-                foreach(var p in pings)
+                foreach(var p in connections)
                 {
-                    if( p.PingStatus == IPStatus.Success)
+                    if( p.Status == IPStatus.Success)
                     {
                         return true;
                     }
@@ -201,9 +217,10 @@ namespace NetUptimeMonitor
             if( dialog.ShowDialog() == DialogResult.OK )
             {
                 StringBuilder sb = new StringBuilder();
-                foreach(var p in pings)
+                foreach(var p in connections)
                 {
-                    sb.AppendLine($"{p.PingStatus} = {p.PingTime.ToShortTimeString()} {p.PingTime.ToShortDateString()}");
+                    var dur = p.EndTime - p.StartTime;
+                    sb.AppendLine($"{p.Status} = {p.StartTime.ToString()} to {p.EndTime.ToString()}. Duration: {dur.ToString()}");
                 }
                 //save file
                 System.IO.File.WriteAllText(dialog.FileName, sb.ToString());

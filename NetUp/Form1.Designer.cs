@@ -38,18 +38,19 @@
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
             this.flowLayoutPanel3 = new System.Windows.Forms.FlowLayoutPanel();
-            this.FailRoot = new System.Windows.Forms.FlowLayoutPanel();
-            this.label1 = new System.Windows.Forms.Label();
-            this.LastFailLabel = new System.Windows.Forms.Label();
             this.SuccessRoot = new System.Windows.Forms.FlowLayoutPanel();
             this.label4 = new System.Windows.Forms.Label();
             this.LastSuccessLabel = new System.Windows.Forms.Label();
+            this.FailRoot = new System.Windows.Forms.FlowLayoutPanel();
+            this.label1 = new System.Windows.Forms.Label();
+            this.LastFailLabel = new System.Windows.Forms.Label();
             this.form1BindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.startTestingLabel = new System.Windows.Forms.Label();
             this.flowLayoutPanel1.SuspendLayout();
             this.flowLayoutPanel2.SuspendLayout();
             this.flowLayoutPanel3.SuspendLayout();
-            this.FailRoot.SuspendLayout();
             this.SuccessRoot.SuspendLayout();
+            this.FailRoot.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.form1BindingSource)).BeginInit();
             this.SuspendLayout();
             // 
@@ -101,7 +102,7 @@
             // 
             // SaveButton
             // 
-            this.SaveButton.Location = new System.Drawing.Point(3, 134);
+            this.SaveButton.Location = new System.Drawing.Point(3, 147);
             this.SaveButton.Name = "SaveButton";
             this.SaveButton.Size = new System.Drawing.Size(75, 23);
             this.SaveButton.TabIndex = 6;
@@ -112,6 +113,7 @@
             // flowLayoutPanel1
             // 
             this.flowLayoutPanel1.Controls.Add(this.button1);
+            this.flowLayoutPanel1.Controls.Add(this.startTestingLabel);
             this.flowLayoutPanel1.Controls.Add(this.flowLayoutPanel2);
             this.flowLayoutPanel1.Controls.Add(this.flowLayoutPanel3);
             this.flowLayoutPanel1.Controls.Add(this.SuccessRoot);
@@ -129,7 +131,7 @@
             this.flowLayoutPanel2.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.flowLayoutPanel2.Controls.Add(this.label2);
             this.flowLayoutPanel2.Controls.Add(this.SucceedLabel);
-            this.flowLayoutPanel2.Location = new System.Drawing.Point(3, 58);
+            this.flowLayoutPanel2.Location = new System.Drawing.Point(3, 71);
             this.flowLayoutPanel2.Name = "flowLayoutPanel2";
             this.flowLayoutPanel2.Size = new System.Drawing.Size(90, 13);
             this.flowLayoutPanel2.TabIndex = 8;
@@ -140,40 +142,10 @@
             this.flowLayoutPanel3.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.flowLayoutPanel3.Controls.Add(this.label3);
             this.flowLayoutPanel3.Controls.Add(this.FailedLabel);
-            this.flowLayoutPanel3.Location = new System.Drawing.Point(3, 77);
+            this.flowLayoutPanel3.Location = new System.Drawing.Point(3, 90);
             this.flowLayoutPanel3.Name = "flowLayoutPanel3";
             this.flowLayoutPanel3.Size = new System.Drawing.Size(63, 13);
             this.flowLayoutPanel3.TabIndex = 8;
-            // 
-            // FailRoot
-            // 
-            this.FailRoot.AutoSize = true;
-            this.FailRoot.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.FailRoot.Controls.Add(this.label1);
-            this.FailRoot.Controls.Add(this.LastFailLabel);
-            this.FailRoot.Location = new System.Drawing.Point(3, 115);
-            this.FailRoot.Name = "FailRoot";
-            this.FailRoot.Size = new System.Drawing.Size(74, 13);
-            this.FailRoot.TabIndex = 9;
-            this.FailRoot.Visible = false;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(3, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(49, 13);
-            this.label1.TabIndex = 3;
-            this.label1.Text = "Last Fail:";
-            // 
-            // LastFailLabel
-            // 
-            this.LastFailLabel.AutoSize = true;
-            this.LastFailLabel.Location = new System.Drawing.Point(58, 0);
-            this.LastFailLabel.Name = "LastFailLabel";
-            this.LastFailLabel.Size = new System.Drawing.Size(13, 13);
-            this.LastFailLabel.TabIndex = 5;
-            this.LastFailLabel.Text = "0";
             // 
             // SuccessRoot
             // 
@@ -181,7 +153,7 @@
             this.SuccessRoot.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.SuccessRoot.Controls.Add(this.label4);
             this.SuccessRoot.Controls.Add(this.LastSuccessLabel);
-            this.SuccessRoot.Location = new System.Drawing.Point(3, 96);
+            this.SuccessRoot.Location = new System.Drawing.Point(3, 109);
             this.SuccessRoot.Name = "SuccessRoot";
             this.SuccessRoot.Size = new System.Drawing.Size(99, 13);
             this.SuccessRoot.TabIndex = 10;
@@ -205,9 +177,47 @@
             this.LastSuccessLabel.TabIndex = 5;
             this.LastSuccessLabel.Text = "0";
             // 
+            // FailRoot
+            // 
+            this.FailRoot.AutoSize = true;
+            this.FailRoot.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.FailRoot.Controls.Add(this.label1);
+            this.FailRoot.Controls.Add(this.LastFailLabel);
+            this.FailRoot.Location = new System.Drawing.Point(3, 128);
+            this.FailRoot.Name = "FailRoot";
+            this.FailRoot.Size = new System.Drawing.Size(74, 13);
+            this.FailRoot.TabIndex = 9;
+            this.FailRoot.Visible = false;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(3, 0);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(49, 13);
+            this.label1.TabIndex = 3;
+            this.label1.Text = "Last Fail:";
+            // 
+            // LastFailLabel
+            // 
+            this.LastFailLabel.AutoSize = true;
+            this.LastFailLabel.Location = new System.Drawing.Point(58, 0);
+            this.LastFailLabel.Name = "LastFailLabel";
+            this.LastFailLabel.Size = new System.Drawing.Size(13, 13);
+            this.LastFailLabel.TabIndex = 5;
+            this.LastFailLabel.Text = "0";
+            // 
             // form1BindingSource
             // 
             this.form1BindingSource.DataSource = typeof(NetUptimeMonitor.Form1);
+            // 
+            // startTestingLabel
+            // 
+            this.startTestingLabel.AutoSize = true;
+            this.startTestingLabel.Location = new System.Drawing.Point(3, 55);
+            this.startTestingLabel.Name = "startTestingLabel";
+            this.startTestingLabel.Size = new System.Drawing.Size(0, 13);
+            this.startTestingLabel.TabIndex = 11;
             // 
             // Form1
             // 
@@ -224,10 +234,10 @@
             this.flowLayoutPanel2.PerformLayout();
             this.flowLayoutPanel3.ResumeLayout(false);
             this.flowLayoutPanel3.PerformLayout();
-            this.FailRoot.ResumeLayout(false);
-            this.FailRoot.PerformLayout();
             this.SuccessRoot.ResumeLayout(false);
             this.SuccessRoot.PerformLayout();
+            this.FailRoot.ResumeLayout(false);
+            this.FailRoot.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.form1BindingSource)).EndInit();
             this.ResumeLayout(false);
 
@@ -251,6 +261,7 @@
         private System.Windows.Forms.FlowLayoutPanel FailRoot;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label LastFailLabel;
+        private System.Windows.Forms.Label startTestingLabel;
     }
 }
 
