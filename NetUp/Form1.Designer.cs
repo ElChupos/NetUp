@@ -36,6 +36,7 @@
             this.FailedLabel = new System.Windows.Forms.Label();
             this.SaveButton = new System.Windows.Forms.Button();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            this.startTestingLabel = new System.Windows.Forms.Label();
             this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
             this.flowLayoutPanel3 = new System.Windows.Forms.FlowLayoutPanel();
             this.SuccessRoot = new System.Windows.Forms.FlowLayoutPanel();
@@ -45,7 +46,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.LastFailLabel = new System.Windows.Forms.Label();
             this.form1BindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.startTestingLabel = new System.Windows.Forms.Label();
+            this.currentConnectionLength = new System.Windows.Forms.Label();
             this.flowLayoutPanel1.SuspendLayout();
             this.flowLayoutPanel2.SuspendLayout();
             this.flowLayoutPanel3.SuspendLayout();
@@ -102,7 +103,7 @@
             // 
             // SaveButton
             // 
-            this.SaveButton.Location = new System.Drawing.Point(3, 147);
+            this.SaveButton.Location = new System.Drawing.Point(3, 160);
             this.SaveButton.Name = "SaveButton";
             this.SaveButton.Size = new System.Drawing.Size(75, 23);
             this.SaveButton.TabIndex = 6;
@@ -118,12 +119,21 @@
             this.flowLayoutPanel1.Controls.Add(this.flowLayoutPanel3);
             this.flowLayoutPanel1.Controls.Add(this.SuccessRoot);
             this.flowLayoutPanel1.Controls.Add(this.FailRoot);
+            this.flowLayoutPanel1.Controls.Add(this.currentConnectionLength);
             this.flowLayoutPanel1.Controls.Add(this.SaveButton);
             this.flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
             this.flowLayoutPanel1.Location = new System.Drawing.Point(12, 12);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
             this.flowLayoutPanel1.Size = new System.Drawing.Size(271, 254);
             this.flowLayoutPanel1.TabIndex = 7;
+            // 
+            // startTestingLabel
+            // 
+            this.startTestingLabel.AutoSize = true;
+            this.startTestingLabel.Location = new System.Drawing.Point(3, 55);
+            this.startTestingLabel.Name = "startTestingLabel";
+            this.startTestingLabel.Size = new System.Drawing.Size(0, 13);
+            this.startTestingLabel.TabIndex = 11;
             // 
             // flowLayoutPanel2
             // 
@@ -211,13 +221,14 @@
             // 
             this.form1BindingSource.DataSource = typeof(NetUptimeMonitor.Form1);
             // 
-            // startTestingLabel
+            // currentConnectionLength
             // 
-            this.startTestingLabel.AutoSize = true;
-            this.startTestingLabel.Location = new System.Drawing.Point(3, 55);
-            this.startTestingLabel.Name = "startTestingLabel";
-            this.startTestingLabel.Size = new System.Drawing.Size(0, 13);
-            this.startTestingLabel.TabIndex = 11;
+            this.currentConnectionLength.AutoSize = true;
+            this.currentConnectionLength.Location = new System.Drawing.Point(3, 144);
+            this.currentConnectionLength.Name = "currentConnectionLength";
+            this.currentConnectionLength.Size = new System.Drawing.Size(137, 13);
+            this.currentConnectionLength.TabIndex = 12;
+            this.currentConnectionLength.Text = "Current Connection Length:";
             // 
             // Form1
             // 
@@ -262,6 +273,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label LastFailLabel;
         private System.Windows.Forms.Label startTestingLabel;
+        private System.Windows.Forms.Label currentConnectionLength;
     }
 }
 

@@ -25,6 +25,8 @@ namespace NetUptimeMonitor
             public DateTime EndTime;
             public IPStatus Status;
             public int Pings;
+
+            public TimeSpan Duration => EndTime - StartTime;
         }
 
         public List<ConnectionBlock> connections = new List<ConnectionBlock>();
@@ -94,13 +96,23 @@ namespace NetUptimeMonitor
             FailRoot.Visible = HasFailed;
             if(GetLastBlock(out ConnectionBlock failBlock, p => p.Status != IPStatus.Success) )
             {
-                LastFailLabel.Text = failBlock.EndTime.ToShortTimeString();
+                LastFailLabel.Text = $"{failBlock.EndTime.ToString()}: {FormatTimeSpan(failBlock.Duration)}";
             }
 
             if(GetLastBlock(out ConnectionBlock successBlock, p => p.Status == IPStatus.Success))
             {
-                LastSuccessLabel.Text = successBlock.EndTime.ToShortTimeString();
+                LastSuccessLabel.Text = $"{successBlock.EndTime.ToString()}: {FormatTimeSpan(successBlock.Duration)}";
             }
+            if(connections.Count > 0)
+            {
+                var connection = connections[connections.Count-1];
+                currentConnectionLength.Text = $"Current connection: {connection.Status} {FormatTimeSpan(connection.Duration)}";
+            }
+        }
+
+        private string FormatTimeSpan(TimeSpan s)
+        {
+            return $"{s.Hours}h {s.Minutes}m {s.Seconds}s";
         }
 
         private void Form1_Load(object sender, EventArgs e)
